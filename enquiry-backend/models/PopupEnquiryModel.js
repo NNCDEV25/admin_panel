@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const popupEnquirySchema = new mongoose.Schema({
   user_name: String,
@@ -12,4 +12,6 @@ const popupEnquirySchema = new mongoose.Schema({
 });
 
 // 👇 Explicitly use "popup_enquiries" as collection name
-module.exports = mongoose.model("PopupEnquiry", popupEnquirySchema, "popup_enquiries");
+const PopupEnquiry = mongoose.model("PopupEnquiry", popupEnquirySchema, "popup_enquiries");
+
+export default PopupEnquiry;

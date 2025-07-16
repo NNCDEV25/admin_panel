@@ -1,8 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const PopupEnquiry = require("../models/PopupEnquiryModel");
+import express from "express";
+import PopupEnquiry from "../models/PopupEnquiryModel.js";
 
-// ✅ POST: create new popup enquiry
+const router = express.Router();
+
+// ✅ POST: Create new popup enquiry
 router.post("/", async (req, res) => {
   try {
     const newEnquiry = new PopupEnquiry(req.body);
@@ -13,7 +14,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ✅ GET: fetch all popup enquiries from "popup_enquiries"
+// ✅ GET: Fetch all popup enquiries
 router.get("/", async (req, res) => {
   try {
     const enquiries = await PopupEnquiry.find().sort({ createdAt: -1 });
@@ -23,4 +24,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

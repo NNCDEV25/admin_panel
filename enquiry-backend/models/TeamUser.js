@@ -1,11 +1,15 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const teamUserSchema = new mongoose.Schema({
   name: String,
   email: { type: String, unique: true },
   password: String,
-  role: { type: String, enum: ['admin', 'employee', 'manager'], default: 'employee' },
+  role: {
+    type: String,
+    enum: ["admin", "employee", "manager"],
+    default: "employee",
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -25,4 +29,5 @@ teamUserSchema.pre("save", async function (next) {
   }
 });
 
-module.exports = mongoose.model("TeamUser", teamUserSchema);
+const TeamUser = mongoose.model("TeamUser", teamUserSchema);
+export default TeamUser;

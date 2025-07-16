@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
+import bcrypt from "bcrypt";
+import TeamUser from "../models/TeamUser.js";
+
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const TeamUser = require("../models/TeamUser");
 
 // ✅ Add new team member
 router.post("/add", async (req, res) => {
@@ -14,11 +15,9 @@ router.post("/add", async (req, res) => {
     res.status(201).json({ message: "Team member added" });
   } catch (error) {
     console.error("❌ Error adding team member:", error.message);
-    res.status(500).json({ error: error.message }); // send real error
+    res.status(500).json({ error: error.message });
   }
 });
-
-
 
 // ✅ Count total team members
 router.get("/count", async (req, res) => {
@@ -30,7 +29,7 @@ router.get("/count", async (req, res) => {
   }
 });
 
-// GET: Fetch all team members
+// ✅ Get all team members
 router.get("/all", async (req, res) => {
   try {
     const members = await TeamUser.find().sort({ createdAt: -1 });
@@ -39,7 +38,6 @@ router.get("/all", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch team members" });
   }
 });
-
 
 // ✅ Team login route
 router.post("/login", async (req, res) => {
@@ -54,4 +52,4 @@ router.post("/login", async (req, res) => {
   res.status(200).json({ message: "Login successful", user });
 });
 
-module.exports = router;
+export default router;

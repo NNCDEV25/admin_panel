@@ -11,6 +11,11 @@ export default function EnquiryTableCom() {
       .catch((err) => console.error("Error fetching enquiries:", err));
   }, []);
 
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleString(); // you can customize format if needed
+  };
+
   return (
     <div className="enquiry-container">
       <h2 className="enquiry-heading">Enquiries</h2>
@@ -27,8 +32,8 @@ export default function EnquiryTableCom() {
               <th>Name</th>
               <th>Phone</th>
               <th>Email</th>
-              <th>Service</th>
-              <th>Message</th>
+              <th>Subject</th>
+              <th>Message Time</th>
             </tr>
           </thead>
           <tbody>
@@ -38,8 +43,8 @@ export default function EnquiryTableCom() {
                 <td>{row.name}</td>
                 <td>{row.phone}</td>
                 <td>{row.email}</td>
-                <td>{row.service}</td>
-                <td>{row.message}</td>
+                <td>{row.subject}</td>
+                <td>{formatDate(row.createdAt)}</td>
               </tr>
             ))}
           </tbody>

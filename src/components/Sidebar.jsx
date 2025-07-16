@@ -44,7 +44,7 @@ export default function Sidebar() {
                 </NavDropdown>
 
 
-                <Nav.Link href="/user-details">Employee Details</Nav.Link>
+                <Nav.Link href="/blogs">Blogs</Nav.Link>
 
                 <Nav.Link href="/teams">Teams</Nav.Link>
 

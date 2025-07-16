@@ -5,11 +5,23 @@ export default function EnquiryTableIn() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/enquiries") // Backend API endpoint
+    fetch("http://localhost:5000/api/enquiries")
       .then((res) => res.json())
       .then((json) => setData(json))
       .catch((err) => console.error("Error fetching enquiries:", err));
   }, []);
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A";
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    return new Date(dateString).toLocaleString('en-IN', options);
+  };
 
   return (
     <div className="enquiry-container">
@@ -28,7 +40,7 @@ export default function EnquiryTableIn() {
               <th>Phone</th>
               <th>Email</th>
               <th>Subject</th>
-              <th>Message</th>
+              <th>Message Time</th>
             </tr>
           </thead>
           <tbody>
@@ -39,7 +51,7 @@ export default function EnquiryTableIn() {
                 <td>{row.phone}</td>
                 <td>{row.email}</td>
                 <td>{row.subject}</td>
-                <td>{row.message}</td>
+                <td>{formatDate(row.createdAt)}</td>
               </tr>
             ))}
           </tbody>

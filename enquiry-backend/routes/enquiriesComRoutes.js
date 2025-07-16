@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const EnquiriesCom = require('../models/EnquiriesCom'); // new model
+import express from 'express';
+import EnquiriesCom from '../models/EnquiriesCom.js';
 
-// GET all
+const router = express.Router();
+
+// GET all entries
 router.get('/', async (req, res) => {
   try {
     const records = await EnquiriesCom.find();
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST new
+// POST new entry
 router.post('/', async (req, res) => {
   try {
     const newEntry = new EnquiriesCom(req.body);
@@ -23,8 +24,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// GET: Monthly count of EnquiriesCom
-// GET: Monthly count of EnquiriesCom
+// GET monthly count of EnquiriesCom
 router.get('/monthly-count', async (req, res) => {
   try {
     const results = await EnquiriesCom.aggregate([
@@ -77,4 +77,4 @@ router.get('/monthly-count', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

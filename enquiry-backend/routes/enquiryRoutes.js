@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import Enquiry from '../models/Enquiry.js';
+
 const router = express.Router();
-const Enquiry = require('../models/Enquiry');
 
 // GET all enquiries
 router.get('/', async (req, res) => {
@@ -23,7 +24,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// ✅ NEW: GET monthly enquiry stats
+// GET monthly enquiry stats
 router.get('/monthly-stats', async (req, res) => {
   try {
     const stats = await Enquiry.aggregate([
@@ -42,7 +43,8 @@ router.get('/monthly-stats', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-// GET: Monthly enquiry counts
+
+// GET: Monthly enquiry counts with month names
 router.get('/monthly-count', async (req, res) => {
   try {
     const results = await Enquiry.aggregate([
@@ -78,4 +80,4 @@ router.get('/monthly-count', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
